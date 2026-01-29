@@ -1,0 +1,1745 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How Machine Learning Changes How the World Operates</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@400;500;600&display=swap"
+      rel="stylesheet" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: #c89f7e;
+        --primary-dark: #a67c52;
+        --accent: #e8b4a8;
+        --accent-light: #f4ddd4;
+        --pastel-blue: #b8d4e8;
+        --pastel-green: #c8e6c9;
+        --pastel-lavender: #d4c5e8;
+        --pastel-peach: #ffd7c4;
+        --text-primary: #3e3832;
+        --text-secondary: #6b5d52;
+        --text-tertiary: #9b8b7e;
+        --bg-white: #fffbf7;
+        --bg-cream: #f9f5f0;
+        --bg-beige: #f5efe7;
+        --bg-light-beige: #faf7f2;
+        --border: #e8dfd3;
+        --border-accent: #d4c5b8;
+      }
+
+      body {
+        font-family:
+          "Poppins",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        line-height: 1.7;
+        color: var(--text-primary);
+        background: var(--bg-white);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 60px 40px 40px;
+      }
+
+      /* Profile Section */
+      .profile-section {
+        margin-bottom: 80px;
+        padding-bottom: 60px;
+        border-bottom: 2px solid var(--border);
+      }
+
+      .profile-container {
+        display: flex;
+        gap: 40px;
+        align-items: flex-start;
+        margin-bottom: 48px;
+      }
+
+      .profile-image-wrapper {
+        flex-shrink: 0;
+        text-align: center;
+      }
+
+      .profile-image {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 5px solid var(--primary);
+        box-shadow: 0 8px 24px rgba(200, 159, 126, 0.25);
+      }
+
+      .profile-info {
+        flex: 1;
+      }
+
+      .profile-name {
+        font-family: "Playfair Display", serif;
+        font-size: 2.75rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+        color: var(--primary-dark);
+        letter-spacing: -0.02em;
+      }
+
+      .profile-title {
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 1.15rem;
+        color: var(--text-secondary);
+        margin-bottom: 20px;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+      }
+
+      .profile-bio {
+        font-family: "DM Sans", sans-serif;
+        font-size: 1rem;
+        line-height: 1.8;
+        color: var(--text-secondary);
+        margin-bottom: 24px;
+      }
+
+      .profile-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+
+      .profile-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 20px;
+        background: var(--bg-beige);
+        border: 2px solid var(--border-accent);
+        border-radius: 12px;
+        color: var(--text-primary);
+        text-decoration: none;
+        font-size: 0.95rem;
+        font-weight: 500;
+        font-family: "DM Sans", sans-serif;
+        transition: all 0.3s ease;
+      }
+
+      .profile-link:hover {
+        background: var(--accent-light);
+        border-color: var(--primary);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(200, 159, 126, 0.2);
+      }
+
+      .link-icon {
+        font-size: 1.2rem;
+      }
+
+      .portfolio-intro {
+        background: linear-gradient(
+          135deg,
+          var(--bg-beige) 0%,
+          var(--bg-light-beige) 100%
+        );
+        padding: 32px;
+        border-radius: 16px;
+        border-left: 5px solid var(--primary);
+        box-shadow: 0 4px 12px rgba(200, 159, 126, 0.1);
+      }
+
+      .portfolio-intro h2 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.6rem;
+        font-weight: 700;
+        margin-bottom: 16px;
+        color: var(--primary-dark);
+      }
+
+      .portfolio-intro p {
+        font-family: "DM Sans", sans-serif;
+        font-size: 1.05rem;
+        line-height: 1.8;
+        color: var(--text-secondary);
+        margin: 0;
+      }
+
+      /* Header */
+      header {
+        text-align: center;
+        margin-bottom: 80px;
+        padding-bottom: 60px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 3rem;
+        font-weight: 700;
+        line-height: 1.2;
+        margin-bottom: 32px;
+        color: var(--primary-dark);
+        letter-spacing: -0.02em;
+      }
+
+      .subtitle {
+        font-family: "DM Sans", sans-serif;
+        font-size: 1.2rem;
+        color: var(--text-secondary);
+        max-width: 700px;
+        margin: 0 auto 40px;
+        font-weight: 400;
+        line-height: 1.7;
+      }
+
+      .intro-box {
+        background: linear-gradient(
+          135deg,
+          var(--pastel-peach) 0%,
+          var(--accent-light) 100%
+        );
+        border-left: 5px solid var(--primary);
+        padding: 32px;
+        border-radius: 16px;
+        margin-top: 40px;
+        text-align: left;
+        box-shadow: 0 4px 12px rgba(200, 159, 126, 0.15);
+      }
+
+      .intro-box p {
+        font-family: "DM Sans", sans-serif;
+        font-size: 1.05rem;
+        line-height: 1.8;
+        color: var(--text-primary);
+        margin-bottom: 20px;
+      }
+
+      .intro-box p:last-child {
+        margin-bottom: 0;
+      }
+
+      .intro-box strong {
+        color: var(--primary-dark);
+        font-weight: 600;
+      }
+
+      .intro-list {
+        margin: 16px 0 0 24px;
+        color: var(--text-primary);
+      }
+
+      .intro-list li {
+        margin: 8px 0;
+        font-size: 1.05rem;
+        font-family: "DM Sans", sans-serif;
+      }
+
+      /* Industry Sections */
+      .industry {
+        margin-bottom: 64px;
+        padding: 40px;
+        background: var(--bg-cream);
+        border: 2px solid var(--border);
+        border-radius: 20px;
+        transition: all 0.3s ease;
+      }
+
+      .industry:hover {
+        box-shadow: 0 8px 24px rgba(200, 159, 126, 0.15);
+        border-color: var(--primary);
+        transform: translateY(-2px);
+      }
+
+      .industry-header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 32px;
+        padding-bottom: 24px;
+        border-bottom: 2px solid var(--border-accent);
+      }
+
+      .industry-icon {
+        width: 52px;
+        height: 52px;
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--accent) 100%
+        );
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 26px;
+        flex-shrink: 0;
+        box-shadow: 0 4px 12px rgba(200, 159, 126, 0.2);
+      }
+
+      h2 {
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 1.75rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin: 0;
+        letter-spacing: -0.01em;
+      }
+
+      .phase {
+        margin-bottom: 28px;
+      }
+
+      .phase:last-child {
+        margin-bottom: 0;
+      }
+
+      h3 {
+        font-family: "Poppins", sans-serif;
+        font-size: 0.875rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--text-tertiary);
+        margin-bottom: 12px;
+      }
+
+      .phase-content {
+        font-family: "DM Sans", sans-serif;
+        font-size: 1.05rem;
+        color: var(--text-secondary);
+        line-height: 1.7;
+      }
+
+      .highlight {
+        background: linear-gradient(
+          135deg,
+          var(--pastel-lavender) 0%,
+          var(--pastel-blue) 100%
+        );
+        padding: 24px;
+        border-radius: 14px;
+        border-left: 4px solid var(--primary);
+        box-shadow: 0 2px 8px rgba(200, 159, 126, 0.1);
+      }
+
+      .highlight .phase-content {
+        color: var(--text-primary);
+        font-weight: 500;
+        font-size: 1.1rem;
+      }
+
+      /* Additional Industries */
+      .additional-industries {
+        margin-top: 80px;
+        padding: 48px;
+        background: linear-gradient(
+          135deg,
+          var(--pastel-green) 0%,
+          var(--bg-beige) 100%
+        );
+        border-radius: 20px;
+        border: 2px solid var(--border-accent);
+        box-shadow: 0 4px 12px rgba(200, 159, 126, 0.1);
+      }
+
+      .additional-industries h2 {
+        font-family: "Playfair Display", serif;
+        text-align: center;
+        margin-bottom: 32px;
+        font-size: 2rem;
+        color: var(--primary-dark);
+      }
+
+      .industries-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 24px;
+        margin-top: 32px;
+      }
+
+      .industry-card {
+        background: var(--bg-white);
+        padding: 24px;
+        border-radius: 16px;
+        border: 2px solid var(--border);
+        transition: all 0.3s ease;
+      }
+
+      .industry-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(200, 159, 126, 0.2);
+        border-color: var(--primary);
+      }
+
+      .industry-card h3 {
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        text-transform: none;
+        letter-spacing: normal;
+        margin-bottom: 12px;
+      }
+
+      .industry-card p {
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+        line-height: 1.6;
+      }
+
+      /* Footer */
+      footer {
+        margin-top: 100px;
+        padding: 60px 0 40px;
+        background: linear-gradient(
+          135deg,
+          var(--primary-dark) 0%,
+          var(--primary) 100%
+        );
+        border-radius: 24px 24px 0 0;
+        color: var(--bg-white);
+        position: relative;
+      }
+
+      .footer-content {
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+        padding: 0 40px;
+      }
+
+      .footer-quote {
+        font-family: "Playfair Display", serif;
+        font-size: 1.3rem;
+        font-style: italic;
+        line-height: 1.8;
+        margin-bottom: 40px;
+        color: var(--bg-white);
+        opacity: 0.95;
+      }
+
+      .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 32px;
+        margin-bottom: 40px;
+        flex-wrap: wrap;
+      }
+
+      .footer-link {
+        font-family: "Poppins", sans-serif;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--bg-white);
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 500;
+        padding: 12px 24px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+      }
+
+      .footer-link:hover {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: var(--bg-white);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .footer-link .link-icon {
+        font-size: 1.3rem;
+      }
+
+      .footer-divider {
+        height: 1px;
+        background: rgba(255, 255, 255, 0.2);
+        margin: 40px auto;
+        max-width: 600px;
+      }
+
+      .footer-bottom {
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.95rem;
+        color: var(--bg-white);
+        opacity: 0.8;
+      }
+
+      .footer-bottom p {
+        margin: 8px 0;
+      }
+
+      .footer-name {
+        font-family: "Playfair Display", serif;
+        font-weight: 600;
+        font-size: 1.1rem;
+      }
+
+      .footer-tagline {
+        font-style: italic;
+        margin-top: 12px;
+        opacity: 0.9;
+      }
+
+      /* Tech Stack Section */
+      .tech-stack-section {
+        margin: 80px 0;
+        padding: 48px;
+        background: linear-gradient(
+          135deg,
+          var(--bg-beige) 0%,
+          var(--bg-cream) 100%
+        );
+        border-radius: 20px;
+        border: 2px solid var(--border-accent);
+        box-shadow: 0 4px 12px rgba(200, 159, 126, 0.1);
+      }
+
+      .section-title {
+        font-family: "Playfair Display", serif;
+        font-size: 2rem;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 12px;
+        color: var(--primary-dark);
+      }
+
+      .section-subtitle {
+        font-family: "DM Sans", sans-serif;
+        text-align: center;
+        color: var(--text-secondary);
+        font-size: 1.05rem;
+        margin-bottom: 40px;
+      }
+
+      .tech-categories {
+        display: grid;
+        gap: 32px;
+      }
+
+      .tech-category h3 {
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 16px;
+        text-transform: none;
+        letter-spacing: normal;
+      }
+
+      .tech-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .tech-tag {
+        font-family: "Poppins", sans-serif;
+        display: inline-block;
+        padding: 8px 16px;
+        background: var(--bg-white);
+        border: 2px solid var(--border);
+        border-radius: 10px;
+        font-size: 0.9rem;
+        color: var(--text-primary);
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .tech-tag:hover {
+        background: var(--primary);
+        color: var(--bg-white);
+        border-color: var(--primary);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(200, 159, 126, 0.3);
+      }
+
+      /* Projects Section */
+      .projects-section {
+        margin: 80px 0;
+      }
+
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+        margin-bottom: 40px;
+      }
+
+      .project-card {
+        background: var(--bg-cream);
+        border: 2px solid var(--border);
+        border-radius: 20px;
+        padding: 28px;
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .project-card:hover {
+        box-shadow: 0 8px 24px rgba(200, 159, 126, 0.2);
+        border-color: var(--primary);
+        transform: translateY(-4px);
+      }
+
+      .project-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 16px;
+        gap: 12px;
+      }
+
+      .project-header h3 {
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin: 0;
+        text-transform: none;
+        letter-spacing: normal;
+        flex: 1;
+      }
+
+      .github-link-small {
+        font-family: "Poppins", sans-serif;
+        font-size: 0.85rem;
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 500;
+        white-space: nowrap;
+        transition: all 0.3s ease;
+      }
+
+      .github-link-small:hover {
+        color: var(--primary-dark);
+      }
+
+      .project-description {
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.95rem;
+        line-height: 1.7;
+        color: var(--text-secondary);
+        margin-bottom: 20px;
+        flex: 1;
+      }
+
+      .project-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .project-tag {
+        font-family: "Poppins", sans-serif;
+        font-size: 0.8rem;
+        padding: 6px 12px;
+        background: linear-gradient(
+          135deg,
+          var(--pastel-peach) 0%,
+          var(--accent-light) 100%
+        );
+        color: var(--primary-dark);
+        border-radius: 8px;
+        font-weight: 500;
+        border: 1px solid var(--border-accent);
+      }
+
+      .view-more {
+        text-align: center;
+        margin-top: 24px;
+      }
+
+      .view-more-link {
+        font-family: "Poppins", sans-serif;
+        display: inline-flex;
+        align-items: center;
+        padding: 14px 32px;
+        background: var(--primary);
+        color: var(--bg-white);
+        text-decoration: none;
+        font-weight: 600;
+        border-radius: 12px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(200, 159, 126, 0.3);
+      }
+
+      .view-more-link:hover {
+        background: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(200, 159, 126, 0.4);
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .container {
+          padding: 40px 24px 40px;
+        }
+
+        .profile-container {
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
+
+        .profile-image {
+          width: 160px;
+          height: 160px;
+        }
+
+        .profile-name {
+          font-size: 2rem;
+        }
+
+        .profile-links {
+          flex-direction: column;
+          width: 100%;
+        }
+
+        .profile-link {
+          width: 100%;
+          justify-content: center;
+        }
+
+        h1 {
+          font-size: 2.2rem;
+        }
+
+        .subtitle {
+          font-size: 1.1rem;
+        }
+
+        .industry {
+          padding: 28px 24px;
+        }
+
+        .industry-header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        h2 {
+          font-size: 1.5rem;
+        }
+
+        .industries-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .tech-stack-section {
+          padding: 32px 24px;
+        }
+
+        .projects-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .project-header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .github-link-small {
+          margin-top: 8px;
+        }
+
+        .footer-links {
+          flex-direction: column;
+          gap: 16px;
+        }
+
+        .footer-link {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .footer-quote {
+          font-size: 1.1rem;
+        }
+      }
+
+      /* Print styles */
+      @media print {
+        .container {
+          max-width: 100%;
+        }
+
+        .industry {
+          page-break-inside: avoid;
+          border: 1px solid #ccc;
+        }
+      }
+    </style>
+
+    <script>
+      // ============================================
+      // CUSTOMIZE YOUR INFORMATION HERE
+      // ============================================
+
+      // Replace these values with your actual information
+      const YOUR_INFO = {
+        name: "Rosemary Kamau",
+        title: "Machine Learning Engineer | MLOps & SRE Specialist",
+        bio: "I'm a Machine Learning Engineer with a strong foundation in DevOps and cloud technologies, specializing in designing, building, and deploying production-grade ML systems that drive measurable business outcomes. I bring MLOps and Site Reliability Engineering principles into every project, ensuring scalable, maintainable, and resilient solutions. My expertise spans the full ML lifecycle—from data engineering and model development to deployment, monitoring, and continuous optimization. I'm deeply passionate about clean data, intelligent systems, and the craft of turning complex problems into elegant, automated solutions. I thrive at the intersection of machine learning and engineering excellence, where analytical thinking meets operational rigor.",
+        email: "kamaurosemary@gmail.com",
+        github: "roseemaryy",
+        profileImage: "2B037719-F71D-4A79-9A95-9B696C2D1424_1_105_c.jpeg",
+      };
+
+      // Add your GitHub projects here
+      const PROJECTS = [
+        {
+          name: "Cybersecurity Anomaly Detection",
+          description:
+            "Advanced anomaly detection system for identifying security threats in network traffic and system behavior. Implements unsupervised learning techniques to detect deviations from normal patterns, enabling proactive threat identification and response in real-time cybersecurity operations.",
+          repo: "Cybersecurity-Anomaly-Detection",
+          tags: ["Python", "Anomaly Detection", "Security"],
+        },
+        {
+          name: "Smart Fraud Detection System",
+          description:
+            "Production-ready fraud detection pipeline using ensemble methods and real-time classification. Handles highly imbalanced datasets with advanced sampling techniques, achieving high precision while minimizing false positives in financial transaction monitoring.",
+          repo: "Smart-Fraud-Detection-System",
+          tags: ["Python", "scikit-learn", "MLOps"],
+        },
+        {
+          name: "Cancer Omics Classifier",
+          description:
+            "Multi-omics machine learning classifier for cancer diagnosis and subtype identification. Processes genomic, transcriptomic, and proteomic data using deep learning architectures to support precision medicine and clinical decision-making.",
+          repo: "Cancer-Omics-Classifier",
+          tags: ["Python", "TensorFlow", "Healthcare"],
+        },
+        {
+          name: "Fintech Regulation ML",
+          description:
+            "Regulatory compliance and risk assessment system leveraging NLP and classification models. Automates regulatory document analysis, monitors compliance requirements, and provides predictive insights for fintech risk management.",
+          repo: "Fintech-regulation-ML",
+          tags: ["Python", "NLP", "Compliance"],
+        },
+        {
+          name: "Image Anomaly Detection System",
+          description:
+            "CNN-based visual inspection system for identifying defects and anomalies in manufacturing and quality control. Employs deep learning architectures for automated defect detection, reducing manual inspection time and improving accuracy.",
+          repo: "Image-Anomaly-Detection-System-",
+          tags: ["Python", "CNNs", "Computer Vision"],
+        },
+        {
+          name: "Sales Revenue Forecaster",
+          description:
+            "Time series forecasting system for sales prediction and revenue planning. Combines statistical methods with ML models to provide accurate demand forecasts, enabling data-driven inventory management and resource allocation.",
+          repo: "Sales-Revenue-Forecaster",
+          tags: ["Python", "Time Series", "Business Analytics"],
+        },
+        {
+          name: "Credit Card Fraud Detector",
+          description:
+            "Real-time credit card fraud detection using gradient boosting and neural networks. Deployed with FastAPI and monitoring infrastructure, processing transactions with sub-100ms latency while maintaining high detection rates.",
+          repo: "Credit-Card-Fraud-Detector",
+          tags: ["Python", "FastAPI", "Real-time ML"],
+        },
+        {
+          name: "Customer Churn Prediction",
+          description:
+            "Predictive analytics system for identifying at-risk customers before they leave. Uses feature engineering and ensemble models to provide actionable insights for retention strategies, with integrated model monitoring and retraining pipelines.",
+          repo: "Customer-Churn-Prediction",
+          tags: ["Python", "MLOps", "Predictive Analytics"],
+        },
+      ];
+
+      // ============================================
+      // AUTO-UPDATE CONTENT (Don't modify below)
+      // ============================================
+
+      window.addEventListener("DOMContentLoaded", (event) => {
+        // Update profile information
+        document.querySelector(".profile-name").textContent = YOUR_INFO.name;
+        document.querySelector(".profile-title").textContent = YOUR_INFO.title;
+        document.querySelector(".profile-bio").textContent = YOUR_INFO.bio;
+        document.getElementById("profileImage").src = YOUR_INFO.profileImage;
+        document.getElementById("emailLink").href = `mailto:${YOUR_INFO.email}`;
+        document.getElementById("emailLink").innerHTML =
+          `<span class="link-icon">✉️</span> ${YOUR_INFO.email}`;
+        document.getElementById("githubLink").href =
+          `https://github.com/${YOUR_INFO.github}`;
+        document.getElementById("githubLink").innerHTML =
+          `<span class="link-icon">💻</span> github.com/${YOUR_INFO.github}`;
+        document.getElementById("viewMoreLink").href =
+          `https://github.com/${YOUR_INFO.github}?tab=repositories`;
+
+        // Update projects
+        const projectsGrid = document.querySelector(".projects-grid");
+
+        // Show all 8 projects
+        projectsGrid.innerHTML = PROJECTS.map(
+          (project) => `
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>${project.name}</h3>
+                        <a href="https://github.com/${YOUR_INFO.github}/${project.repo}" target="_blank" class="github-link-small">
+                            <span>View on GitHub →</span>
+                        </a>
+                    </div>
+                    <p class="project-description">${project.description}</p>
+                    <div class="project-tags">
+                        ${project.tags.map((tag) => `<span class="project-tag">${tag}</span>`).join("")}
+                    </div>
+                </div>
+            `,
+        ).join("");
+      });
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Profile Section -->
+      <section class="profile-section">
+        <div class="profile-container">
+          <div class="profile-image-wrapper">
+            <img
+              src="https://via.placeholder.com/200x200/0066FF/ffffff?text=Your+Photo"
+              alt="Profile Picture"
+              class="profile-image"
+              id="profileImage" />
+          </div>
+          <div class="profile-info">
+            <h1 class="profile-name">Your Name</h1>
+            <p class="profile-title">
+              Machine Learning Engineer | Data Scientist
+            </p>
+            <p class="profile-bio">
+              [Add your bio here - who you are, your experience, what drives
+              your passion for ML, and what you bring to the table. This is your
+              opportunity to introduce yourself and set the context for the
+              portfolio below.]
+            </p>
+            <div class="profile-links">
+              <a
+                href="mailto:your.email@example.com"
+                class="profile-link"
+                id="emailLink">
+                <span class="link-icon">✉️</span>
+                your.email@example.com
+              </a>
+              <a
+                href="https://github.com/yourusername"
+                target="_blank"
+                class="profile-link"
+                id="githubLink">
+                <span class="link-icon">💻</span>
+                github.com/yourusername
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="portfolio-intro">
+          <h2>About This Portfolio</h2>
+          <p>
+            This portfolio demonstrates my understanding of how machine learning
+            fundamentally transforms industries and operations. Rather than
+            focusing solely on technical implementations, it showcases my
+            ability to identify where ML creates the most value: shifting
+            organizations from reactive to predictive, from static rules to
+            adaptive intelligence, and from intuition-driven to data-driven
+            decision-making. Each industry section reflects real-world
+            applications where I've developed expertise in translating business
+            problems into ML solutions.
+          </p>
+        </div>
+      </section>
+
+      <header>
+        <h1>How Machine Learning Changes<br />How the World Operates</h1>
+        <p class="subtitle">
+          Machine learning is not about models or algorithms in isolation.<br />It
+          is about shifting decision-making from static rules to adaptive
+          systems that learn from data.
+        </p>
+
+        <div class="intro-box">
+          <p><strong>Across industries, ML enters the picture when:</strong></p>
+          <ul class="intro-list">
+            <li>data volume exceeds human reasoning</li>
+            <li>decisions must be made faster than humans can react</li>
+            <li>uncertainty and risk dominate outcomes</li>
+          </ul>
+          <p style="margin-top: 24px">
+            Below is how that shift plays out — in practice.
+          </p>
+        </div>
+      </header>
+
+      <main>
+        <!-- Sales & Revenue Operations -->
+        <section class="industry">
+          <div class="industry-header">
+            <div class="industry-icon">📊</div>
+            <h2>Sales & Revenue Operations</h2>
+          </div>
+
+          <div class="phase">
+            <h3>Before Machine Learning</h3>
+            <p class="phase-content">
+              Sales teams relied on historical reports, intuition, and reactive
+              metrics. Forecasts were coarse, churn was discovered late, and
+              opportunities were often missed.
+            </p>
+          </div>
+
+          <div class="phase">
+            <h3>Where ML Enters</h3>
+            <p class="phase-content">
+              Machine learning models learn patterns from customer behavior,
+              transaction history, engagement signals, and timing.
+            </p>
+          </div>
+
+          <div class="phase highlight">
+            <h3>What Fundamentally Changes</h3>
+            <p class="phase-content">
+              Revenue becomes predictable instead of reactive. Organizations can
+              forecast demand, score leads, and intervene before customers churn
+              — not after revenue is lost.
+            </p>
+          </div>
+        </section>
+
+        <!-- Marketing & Customer Intelligence -->
+        <section class="industry">
+          <div class="industry-header">
+            <div class="industry-icon">🎯</div>
+            <h2>Marketing & Customer Intelligence</h2>
+          </div>
+
+          <div class="phase">
+            <h3>Before Machine Learning</h3>
+            <p class="phase-content">
+              Segmentation was manual and static. Campaigns treated customers as
+              groups rather than individuals.
+            </p>
+          </div>
+
+          <div class="phase">
+            <h3>Where ML Enters</h3>
+            <p class="phase-content">
+              Models learn preferences, behavior patterns, and response
+              likelihood from interaction data.
+            </p>
+          </div>
+
+          <div class="phase highlight">
+            <h3>What Fundamentally Changes</h3>
+            <p class="phase-content">
+              Marketing becomes personalized at scale. Every customer
+              interaction becomes data-driven rather than assumption-driven.
+            </p>
+          </div>
+        </section>
+
+        <!-- Fintech & Financial Risk -->
+        <section class="industry">
+          <div class="industry-header">
+            <div class="industry-icon">💳</div>
+            <h2>Fintech & Financial Risk</h2>
+          </div>
+
+          <div class="phase">
+            <h3>Before Machine Learning</h3>
+            <p class="phase-content">
+              Risk rules were fixed. Fraud detection relied on thresholds that
+              attackers quickly learned to bypass.
+            </p>
+          </div>
+
+          <div class="phase">
+            <h3>Where ML Enters</h3>
+            <p class="phase-content">
+              Classification and anomaly detection models learn from millions of
+              transactions and continuously adapt to new behavior.
+            </p>
+          </div>
+
+          <div class="phase highlight">
+            <h3>What Fundamentally Changes</h3>
+            <p class="phase-content">
+              Risk systems become dynamic and self-adjusting. Fraud is detected
+              earlier, credit decisions improve, and false positives are
+              reduced.
+            </p>
+          </div>
+        </section>
+
+        <!-- Cybersecurity -->
+        <section class="industry">
+          <div class="industry-header">
+            <div class="industry-icon">🔒</div>
+            <h2>Cybersecurity</h2>
+          </div>
+
+          <div class="phase">
+            <h3>Before Machine Learning</h3>
+            <p class="phase-content">
+              Security systems relied on signatures and known attack patterns.
+              Anything novel slipped through.
+            </p>
+          </div>
+
+          <div class="phase">
+            <h3>Where ML Enters</h3>
+            <p class="phase-content">
+              Anomaly detection models learn what "normal" looks like across
+              networks, users, and systems.
+            </p>
+          </div>
+
+          <div class="phase highlight">
+            <h3>What Fundamentally Changes</h3>
+            <p class="phase-content">
+              Security shifts from rule-based defense to behavior-based
+              detection. Threats are identified by deviation, not prior
+              knowledge.
+            </p>
+          </div>
+        </section>
+
+        <!-- Fraud (Cross-Industry) -->
+        <section class="industry">
+          <div class="industry-header">
+            <div class="industry-icon">🛡️</div>
+            <h2>Fraud Detection (Cross-Industry)</h2>
+          </div>
+
+          <div class="phase">
+            <h3>Before Machine Learning</h3>
+            <p class="phase-content">
+              Fraud prevention was brittle, expensive, and slow to adapt.
+            </p>
+          </div>
+
+          <div class="phase">
+            <h3>Where ML Enters</h3>
+            <p class="phase-content">
+              Models trained on highly imbalanced data identify subtle patterns
+              invisible to rules.
+            </p>
+          </div>
+
+          <div class="phase highlight">
+            <h3>What Fundamentally Changes</h3>
+            <p class="phase-content">
+              Fraud detection becomes scalable, adaptive, and continuously
+              improving, even as attack strategies evolve.
+            </p>
+          </div>
+        </section>
+
+        <!-- Supply Chain & Logistics -->
+        <section class="industry">
+          <div class="industry-header">
+            <div class="industry-icon">🚚</div>
+            <h2>Supply Chain & Logistics</h2>
+          </div>
+
+          <div class="phase">
+            <h3>Before Machine Learning</h3>
+            <p class="phase-content">
+              Delays were explained after they happened. Planning assumed
+              stability in an unstable world.
+            </p>
+          </div>
+
+          <div class="phase">
+            <h3>Where ML Enters</h3>
+            <p class="phase-content">
+              Predictive models learn from shipment history, routes, demand
+              signals, and operational constraints.
+            </p>
+          </div>
+
+          <div class="phase highlight">
+            <h3>What Fundamentally Changes</h3>
+            <p class="phase-content">
+              Disruptions are anticipated instead of reacted to. Decision-making
+              shifts from firefighting to prevention.
+            </p>
+          </div>
+        </section>
+
+        <!-- Manufacturing & Industrial Systems -->
+        <section class="industry">
+          <div class="industry-header">
+            <div class="industry-icon">⚙️</div>
+            <h2>Manufacturing & Industrial Systems</h2>
+          </div>
+
+          <div class="phase">
+            <h3>Before Machine Learning</h3>
+            <p class="phase-content">
+              Maintenance followed fixed schedules or reacted to breakdowns.
+            </p>
+          </div>
+
+          <div class="phase">
+            <h3>Where ML Enters</h3>
+            <p class="phase-content">
+              Models learn from sensor data, machine logs, and operational
+              telemetry.
+            </p>
+          </div>
+
+          <div class="phase highlight">
+            <h3>What Fundamentally Changes</h3>
+            <p class="phase-content">
+              Maintenance becomes predictive rather than reactive, reducing
+              downtime and cost.
+            </p>
+          </div>
+        </section>
+
+        <!-- Automotive & Mobility -->
+        <section class="industry">
+          <div class="industry-header">
+            <div class="industry-icon">🚗</div>
+            <h2>Automotive & Mobility</h2>
+          </div>
+
+          <div class="phase">
+            <h3>Before Machine Learning</h3>
+            <p class="phase-content">
+              Demand planning, fault detection, and fleet management were manual
+              and delayed.
+            </p>
+          </div>
+
+          <div class="phase">
+            <h3>Where ML Enters</h3>
+            <p class="phase-content">
+              Models learn from telemetry, usage patterns, and historical
+              failures.
+            </p>
+          </div>
+
+          <div class="phase highlight">
+            <h3>What Fundamentally Changes</h3>
+            <p class="phase-content">
+              Vehicles and fleets become data-driven systems, improving safety,
+              reliability, and efficiency.
+            </p>
+          </div>
+        </section>
+
+        <!-- Real Estate & Property Markets -->
+        <section class="industry">
+          <div class="industry-header">
+            <div class="industry-icon">🏢</div>
+            <h2>Real Estate & Property Markets</h2>
+          </div>
+
+          <div class="phase">
+            <h3>Before Machine Learning</h3>
+            <p class="phase-content">
+              Pricing relied on static comparables and human judgment.
+            </p>
+          </div>
+
+          <div class="phase">
+            <h3>Where ML Enters</h3>
+            <p class="phase-content">
+              Regression models learn from location, market trends, economic
+              signals, and historical prices.
+            </p>
+          </div>
+
+          <div class="phase highlight">
+            <h3>What Fundamentally Changes</h3>
+            <p class="phase-content">
+              Valuation becomes responsive, data-driven, and market-aware, even
+              in volatile conditions.
+            </p>
+          </div>
+        </section>
+
+        <!-- Human Resources & Workforce Analytics -->
+        <section class="industry">
+          <div class="industry-header">
+            <div class="industry-icon">👥</div>
+            <h2>Human Resources & Workforce Analytics</h2>
+          </div>
+
+          <div class="phase">
+            <h3>Before Machine Learning</h3>
+            <p class="phase-content">
+              Attrition and performance issues were discovered too late.
+            </p>
+          </div>
+
+          <div class="phase">
+            <h3>Where ML Enters</h3>
+            <p class="phase-content">
+              Predictive models identify patterns linked to turnover,
+              engagement, and hiring success.
+            </p>
+          </div>
+
+          <div class="phase highlight">
+            <h3>What Fundamentally Changes</h3>
+            <p class="phase-content">
+              HR becomes proactive instead of reactive, improving retention and
+              workforce planning.
+            </p>
+          </div>
+        </section>
+
+        <!-- Healthcare & Life Sciences -->
+        <section class="industry">
+          <div class="industry-header">
+            <div class="industry-icon">🏥</div>
+            <h2>Healthcare & Life Sciences</h2>
+          </div>
+
+          <div class="phase">
+            <h3>Before Machine Learning</h3>
+            <p class="phase-content">
+              Decisions relied heavily on manual analysis and delayed reporting.
+            </p>
+          </div>
+
+          <div class="phase">
+            <h3>Where ML Enters</h3>
+            <p class="phase-content">
+              Models learn from patient data, outcomes, and risk indicators.
+            </p>
+          </div>
+
+          <div class="phase highlight">
+            <h3>What Fundamentally Changes</h3>
+            <p class="phase-content">
+              Care becomes predictive and personalized, improving outcomes and
+              resource allocation.
+            </p>
+          </div>
+        </section>
+
+        <!-- Insurance -->
+        <section class="industry">
+          <div class="industry-header">
+            <div class="industry-icon">🏛️</div>
+            <h2>Insurance</h2>
+          </div>
+
+          <div class="phase">
+            <h3>Before Machine Learning</h3>
+            <p class="phase-content">
+              Pricing and claims relied on coarse actuarial models.
+            </p>
+          </div>
+
+          <div class="phase">
+            <h3>Where ML Enters</h3>
+            <p class="phase-content">
+              Models learn risk at a granular level from behavioral and
+              historical data.
+            </p>
+          </div>
+
+          <div class="phase highlight">
+            <h3>What Fundamentally Changes</h3>
+            <p class="phase-content">
+              Risk pricing becomes more accurate, fair, and adaptive.
+            </p>
+          </div>
+        </section>
+
+        <!-- Enterprise Software & Operations -->
+        <section class="industry">
+          <div class="industry-header">
+            <div class="industry-icon">💼</div>
+            <h2>Enterprise Software & Operations</h2>
+          </div>
+
+          <div class="phase">
+            <h3>Before Machine Learning</h3>
+            <p class="phase-content">
+              Enterprise systems recorded data but rarely supported decisions.
+            </p>
+          </div>
+
+          <div class="phase">
+            <h3>Where ML Enters</h3>
+            <p class="phase-content">
+              ML augments workflows with prediction, prioritization, and
+              automation.
+            </p>
+          </div>
+
+          <div class="phase highlight">
+            <h3>What Fundamentally Changes</h3>
+            <p class="phase-content">
+              Enterprise software evolves from systems of record to systems of
+              intelligence.
+            </p>
+          </div>
+        </section>
+
+        <!-- Additional Industries -->
+        <section class="additional-industries">
+          <h2>ML Across All Other Industries</h2>
+          <p
+            style="
+              text-align: center;
+              color: var(--text-secondary);
+              font-size: 1.05rem;
+              max-width: 700px;
+              margin: 0 auto 32px;
+            ">
+            The fundamental shift from reactive to predictive, from static to
+            adaptive, extends across every sector where data, uncertainty, and
+            decision velocity matter.
+          </p>
+
+          <div class="industries-grid">
+            <div class="industry-card">
+              <h3>👗 Fashion & Retail</h3>
+              <p>
+                Trend forecasting, inventory optimization, and personalized
+                recommendations transform from guesswork to data-driven science.
+              </p>
+            </div>
+
+            <div class="industry-card">
+              <h3>🎬 Media & Entertainment</h3>
+              <p>
+                Content recommendations, viewership prediction, and production
+                planning become audience-aware and adaptive.
+              </p>
+            </div>
+
+            <div class="industry-card">
+              <h3>🌾 Agriculture</h3>
+              <p>
+                Crop yield prediction, pest detection, and resource allocation
+                shift from seasonal cycles to precision farming.
+              </p>
+            </div>
+
+            <div class="industry-card">
+              <h3>⚡ Energy & Utilities</h3>
+              <p>
+                Demand forecasting, grid optimization, and predictive
+                maintenance enable proactive infrastructure management.
+              </p>
+            </div>
+
+            <div class="industry-card">
+              <h3>🎓 Education</h3>
+              <p>
+                Learning paths, dropout prediction, and performance assessment
+                become personalized and intervention-driven.
+              </p>
+            </div>
+
+            <div class="industry-card">
+              <h3>🏨 Hospitality & Travel</h3>
+              <p>
+                Dynamic pricing, demand forecasting, and personalized
+                experiences replace static rules with market-responsive systems.
+              </p>
+            </div>
+
+            <div class="industry-card">
+              <h3>📡 Telecommunications</h3>
+              <p>
+                Network optimization, churn prediction, and service quality
+                monitoring become continuously adaptive.
+              </p>
+            </div>
+
+            <div class="industry-card">
+              <h3>🏗️ Construction</h3>
+              <p>
+                Project timelines, cost estimation, and safety monitoring shift
+                from experience-based to pattern-learned insights.
+              </p>
+            </div>
+
+            <div class="industry-card">
+              <h3>⚖️ Legal Services</h3>
+              <p>
+                Document review, case outcome prediction, and research transform
+                from labor-intensive to intelligence-assisted.
+              </p>
+            </div>
+
+            <div class="industry-card">
+              <h3>🎮 Gaming</h3>
+              <p>
+                Player behavior modeling, difficulty adjustment, and content
+                generation become dynamically personalized.
+              </p>
+            </div>
+
+            <div class="industry-card">
+              <h3>📰 Publishing & Journalism</h3>
+              <p>
+                Content discovery, reader engagement, and distribution
+                optimization become audience-responsive.
+              </p>
+            </div>
+
+            <div class="industry-card">
+              <h3>🔬 Research & Development</h3>
+              <p>
+                Drug discovery, material science, and experimental design
+                accelerate through pattern recognition at scale.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Tech Stack Section -->
+        <section class="tech-stack-section">
+          <h2 class="section-title">Technical Expertise</h2>
+          <p class="section-subtitle">
+            Technologies and frameworks I use to build production-grade ML
+            systems
+          </p>
+
+          <div class="tech-categories">
+            <div class="tech-category">
+              <h3>Languages & Core</h3>
+              <div class="tech-tags">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">SQL</span>
+                <span class="tech-tag">Bash</span>
+              </div>
+            </div>
+
+            <div class="tech-category">
+              <h3>Machine Learning & Deep Learning</h3>
+              <div class="tech-tags">
+                <span class="tech-tag">TensorFlow</span>
+                <span class="tech-tag">PyTorch</span>
+                <span class="tech-tag">scikit-learn</span>
+                <span class="tech-tag">CNNs</span>
+                <span class="tech-tag">NLP</span>
+                <span class="tech-tag">LLMs</span>
+                <span class="tech-tag">RAG</span>
+              </div>
+            </div>
+
+            <div class="tech-category">
+              <h3>Data Engineering & Processing</h3>
+              <div class="tech-tags">
+                <span class="tech-tag">NumPy</span>
+                <span class="tech-tag">Pandas</span>
+                <span class="tech-tag">Data Pipelines</span>
+              </div>
+            </div>
+
+            <div class="tech-category">
+              <h3>MLOps & Deployment</h3>
+              <div class="tech-tags">
+                <span class="tech-tag">Docker</span>
+                <span class="tech-tag">Kubernetes</span>
+                <span class="tech-tag">MLOps</span>
+                <span class="tech-tag">Model Deployment</span>
+                <span class="tech-tag">FastAPI</span>
+                <span class="tech-tag">CI/CD</span>
+                <span class="tech-tag">Joblib</span>
+                <span class="tech-tag">Model Pipelines</span>
+              </div>
+            </div>
+
+            <div class="tech-category">
+              <h3>Cloud & Infrastructure</h3>
+              <div class="tech-tags">
+                <span class="tech-tag">AWS</span>
+                <span class="tech-tag">Azure</span>
+                <span class="tech-tag">Monitoring & Logging</span>
+                <span class="tech-tag">SLO/SLA Monitoring</span>
+              </div>
+            </div>
+
+            <div class="tech-category">
+              <h3>Site Reliability Engineering</h3>
+              <div class="tech-tags">
+                <span class="tech-tag">SRE Principles</span>
+                <span class="tech-tag">Incident Detection</span>
+                <span class="tech-tag">Scalable Systems</span>
+                <span class="tech-tag">System Design</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- GitHub Projects Section -->
+        <section class="projects-section">
+          <h2 class="section-title">Featured Projects</h2>
+          <p class="section-subtitle">
+            Selected work demonstrating practical ML applications
+          </p>
+
+          <div class="projects-grid">
+            <div class="project-card">
+              <div class="project-header">
+                <h3>Project Name 1</h3>
+                <a
+                  href="https://github.com/yourusername/project1"
+                  target="_blank"
+                  class="github-link-small">
+                  <span>View on GitHub →</span>
+                </a>
+              </div>
+              <p class="project-description">
+                Brief description of what this project does, the problem it
+                solves, and the ML techniques used. Include key technologies and
+                results achieved.
+              </p>
+              <div class="project-tags">
+                <span class="project-tag">Python</span>
+                <span class="project-tag">TensorFlow</span>
+                <span class="project-tag">NLP</span>
+              </div>
+            </div>
+
+            <div class="project-card">
+              <div class="project-header">
+                <h3>Project Name 2</h3>
+                <a
+                  href="https://github.com/yourusername/project2"
+                  target="_blank"
+                  class="github-link-small">
+                  <span>View on GitHub →</span>
+                </a>
+              </div>
+              <p class="project-description">
+                Brief description of what this project does, the problem it
+                solves, and the ML techniques used. Include key technologies and
+                results achieved.
+              </p>
+              <div class="project-tags">
+                <span class="project-tag">Python</span>
+                <span class="project-tag">PyTorch</span>
+                <span class="project-tag">Computer Vision</span>
+              </div>
+            </div>
+
+            <div class="project-card">
+              <div class="project-header">
+                <h3>Project Name 3</h3>
+                <a
+                  href="https://github.com/yourusername/project3"
+                  target="_blank"
+                  class="github-link-small">
+                  <span>View on GitHub →</span>
+                </a>
+              </div>
+              <p class="project-description">
+                Brief description of what this project does, the problem it
+                solves, and the ML techniques used. Include key technologies and
+                results achieved.
+              </p>
+              <div class="project-tags">
+                <span class="project-tag">Python</span>
+                <span class="project-tag">scikit-learn</span>
+                <span class="project-tag">Time Series</span>
+              </div>
+            </div>
+
+            <div class="project-card">
+              <div class="project-header">
+                <h3>Project Name 4</h3>
+                <a
+                  href="https://github.com/yourusername/project4"
+                  target="_blank"
+                  class="github-link-small">
+                  <span>View on GitHub →</span>
+                </a>
+              </div>
+              <p class="project-description">
+                Brief description of what this project does, the problem it
+                solves, and the ML techniques used. Include key technologies and
+                results achieved.
+              </p>
+              <div class="project-tags">
+                <span class="project-tag">Python</span>
+                <span class="project-tag">XGBoost</span>
+                <span class="project-tag">MLOps</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="view-more">
+            <a
+              href="https://github.com/yourusername?tab=repositories"
+              target="_blank"
+              class="view-more-link"
+              id="viewMoreLink">
+              View all projects on GitHub →
+            </a>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <div class="footer-content">
+          <p class="footer-quote">
+            "The pattern is universal: wherever decisions are made under
+            uncertainty, with large data volumes, or at speeds beyond human
+            capacity — machine learning transforms operations from reactive to
+            predictive, from static to adaptive, from intuition-driven to
+            intelligence-augmented."
+          </p>
+
+          <div class="footer-links">
+            <a href="mailto:kamaurosemary@gmail.com" class="footer-link">
+              <span class="link-icon">✉️</span>
+              Email Me
+            </a>
+            <a
+              href="https://github.com/roseemaryy"
+              target="_blank"
+              class="footer-link">
+              <span class="link-icon">💻</span>
+              GitHub
+            </a>
+            <a
+              href="https://github.com/roseemaryy?tab=repositories"
+              target="_blank"
+              class="footer-link">
+              <span class="link-icon">📂</span>
+              All Projects
+            </a>
+          </div>
+
+          <div class="footer-divider"></div>
+
+          <div class="footer-bottom">
+            <p class="footer-name">Rosemary Kamau</p>
+            <p>Machine Learning Engineer | MLOps & SRE Specialist</p>
+            <p class="footer-tagline">
+              Building intelligent systems that scale
+            </p>
+            <p style="margin-top: 24px; font-size: 0.85rem">
+              © 2026 Rosemary Kamau. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
