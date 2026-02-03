@@ -786,11 +786,7 @@
     </style>
 
     <script>
-      // ============================================
-      // CUSTOMIZE YOUR INFORMATION HERE
-      // ============================================
-
-      // Replace these values with your actual information
+      
       const YOUR_INFO = {
         name: "Rosemary Kamau",
         title: "Machine Learning Engineer | MLOps & SRE Specialist",
@@ -800,7 +796,7 @@
         profileImage: "2B037719-F71D-4A79-9A95-9B696C2D1424_1_105_c.jpeg",
       };
 
-      // Add your GitHub projects here
+      
       const PROJECTS = [
         {
           name: "Cybersecurity Anomaly Detection",
@@ -860,9 +856,7 @@
         },
       ];
 
-      // ============================================
-      // AUTO-UPDATE CONTENT (Don't modify below)
-      // ============================================
+      
 
       window.addEventListener("DOMContentLoaded", (event) => {
         // Update profile information
@@ -880,10 +874,10 @@
         document.getElementById("viewMoreLink").href =
           `https://github.com/${YOUR_INFO.github}?tab=repositories`;
 
-        // Update projects
+       
         const projectsGrid = document.querySelector(".projects-grid");
 
-        // Show all 8 projects
+       
         projectsGrid.innerHTML = PROJECTS.map(
           (project) => `
                 <div class="project-card">
